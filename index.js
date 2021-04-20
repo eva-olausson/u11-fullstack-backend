@@ -6,17 +6,17 @@ const cors = require("cors");
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const passport = require("passport");
-const serverPort = process.env.PORT || 5000;
+const { clientOrigins, serverPort } = require("./config/env.dev");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use("/api/users", users);
 app.use("/api/posts", posts);
+app.use(cors({ origin: clientOrigins }));
 
 app.get("/", (req, res) => {
   res.send("This is the landing page");
