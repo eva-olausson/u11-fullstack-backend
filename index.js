@@ -14,8 +14,8 @@ app.use(express.json());
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
-app.use("/api/users", users);
-app.use("/api/posts", posts);
+app.use("/users", users);
+app.use("/posts", posts);
 app.use(cors({ origin: clientOrigins }));
 
 app.get("/", (req, res) => {
